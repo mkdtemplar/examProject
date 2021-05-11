@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="getData.js"></script>
+</head>
+<body>
+<h1>
+    Variable subnetting for class C IP addresses with CIDR notation from /24
+    until /32
+</h1>
+<form action="#">
+    <div>
+        <label>Enter IP address: </label
+        ><input
+            type="number"
+            min="192"
+            max="223"
+            step="1"
+            value="192"
+            id="firstoctet"
+    />
+        <input
+                type="number"
+                min="0"
+                max="255"
+                step="1"
+                value="0"
+                id="secondoctet"
+        />
+        <input
+                type="number"
+                min="0"
+                max="255"
+                step="1"
+                value="0"
+                id="thirdoctet"
+        />
+        <input
+                type="number"
+                min="0"
+                max="255"
+                step="1"
+                value="0"
+                id="fourthoctet"
+        />
+    </div>
+    <div>
+        <label>CIDR</label
+        ><input type="number" min="24" max="32" step="1" id="cidr" />
+    </div>
+    <div>
+        <label>Enter number of LAN:</label
+        ><input type="number" id="numberOfLAN" />
+    </div>
+</form>
+<div>
+    <button id="submit">Click to enter number of Hosts per LAN</button>
+</div>
+<div id="container"></div>
+<div id="sendTo"></div>
+<div id="outputData"></div>
+</body>
+</html>
