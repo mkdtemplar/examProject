@@ -7,8 +7,8 @@ h1 {
 }
 
 label {
-   
-    font: 15px 'Exo 2', sans-serif;
+    font: 15px "Exo 2", sans-serif;
+    text-align: center;
 }
 
 div {
@@ -16,24 +16,44 @@ div {
     margin-bottom: 10px;
 }
 
-
 input {
     margin: 6px;
+    text-align: center;
 }
 
 button {
     margin-top: 10px;
     padding: 2px;
-    font: 15px 'Exo 2', sans-serif;
+    font: 15px "Exo 2", sans-serif;
     text-align: center;
 }
 
 body {
     height: 100%;
     width: 100%;
-    color: lightskyblue;
+    color: black;
     background-color: royalblue;
 }
 form {
     text-align: center;
+}
+
+table {
+    background-color: lightblue;
+    border-collapse: collapse;
+    border: 1px solid gray;
+}
+
+th,
+td {
+    padding: 5px;
+    border: 1px solid gray;
+}
+
+tr:nth-child(even) {
+    background-color: lightcoral;
+}
+
+tr:first-child {
+    background-color: lightgreen;
 }
