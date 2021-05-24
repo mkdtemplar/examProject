@@ -1,20 +1,20 @@
+
 var lanHostsArray = Array();
 var hostsPerLan = Array();
-
-var count = 0;
 
 $(document).ready(function () {
     $("#submit").click(function () {
         var num = parseInt(document.getElementById("numberOfLAN").value);
         for (var i = 1; i <= num; i++) {
             $("#container").append(
-                "<label>LAN: " + i + "</label><input type='number' placeholder='Number of hosts' name = 'lan'><br>");
+                "<label>LAN: " + i + "</label><input type='number' placeholder='Number of hosts' name = 'lan[]'><br>");
         }
         $("#sendTo").append("<button id='senddata' type='submit'  onclick= 'sumHosts (); numLans(); lanHosts(); setHosts(); getSubAndMask()'>Calculate VLSM</button>");
     });
 });
 
-var LANsArray = [];
+
+var data = {};
 var subnets = [1, 2, 4, 8, 16, 32, 64, 128, 256];
 var hosts = [256, 128, 64, 32, 16, 8, 4, 2, 1];
 var submask = [24, 25, 26, 27, 28, 29, 30, 31, 32];
@@ -37,7 +37,7 @@ function validateForm() {
 function numLans() {
 
 
-    var input = document.getElementsByName("lan");
+    var input = document.getElementsByName("lan[]");
 
     for (var i = 0; i < input.length; i++) {
         lanHostsArray[i] = parseInt(input[i].value);
@@ -124,12 +124,12 @@ function getSubAndMask() {
         var rangeIP = firstoctet + "." + secondoctet + "." + thirdoctet + "." + (fourthOctet + 1) + " - " + firstoctet +
             "." + secondoctet + "." + thirdoctet + "." + (fourthOctet + hostsPerLan[i] - 2);
 
-        LANsArray[i] = [];
-        LANsArray[i][0] = toLanArraynetID + " ";
-        LANsArray[i][1] = " " + subMaskNo + " ";
-        LANsArray[i][2] = " " + hostsPerLan[i] + " ";
-        LANsArray[i][3] = " " + subnetNo + " ";
-        LANsArray[i][4] = " " + rangeIP + " ";
+        data[i] = [];
+        data[i][0] = toLanArraynetID;
+        data[i][1] = subMaskNo;
+        data[i][2] = hostsPerLan[i];
+        data[i][3] = subnetNo;
+        data[i][4] = rangeIP;
 
         fourthOctet += hostsPerLan[i];
         if (fourthOctet >= 254) {
@@ -143,21 +143,8 @@ function getSubAndMask() {
 
     $(document).ready(function () {
         $("#reload").append("<a href='index.html'><button>Click for new calculation</button></a>")
-        $("#todatabase").append("<button type='submit' onclick = 'passDataToPHP()'>Save to MySQL</button>");
-    });
+        $("#tosql").append("<button type = 'submit'>Save to MySQL</button>")
 
-
-
-}
-
-function passDataToPHP() {
-    var arrayJSON = JSON.stringify(LANsArray);
-    $.ajax({
-        type: "POST",
-        URL: "inDatabase.php",
-        data: { dataArray: arrayJSON },
-        success: function () {
-            alert("Success");
-        }
     });
 }
+

@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://requirejs.org/docs/release/2.3.6/minified/require.js"></script>
+    
     <script src="getData.js"></script>
 </head>
 
@@ -16,7 +18,7 @@
     Variable subnetting for class C IP addresses with CIDR notation from /24
     until /32
 </h1>
-<form action="index.html" method="POST" id="myformId"  name="myForm" onsubmit="validateForm()">
+<form action="#"  id="myformId"  name="myForm" onsubmit="validateForm()">
     <div>
         <label>Enter IP address: </label><input type="number" min="192" max="223" step="1" value="192" id="firstoctet" name="first" readonly />
         <input type="number" min="0" max="255" step="1"  id="secondoctet" name="second" required/>
@@ -26,19 +28,25 @@
     <div><label>Enter number of Networks:</label><input type="number" id="numberOfLAN" /></div>
 
 </form>
-<div> <button id="submit" type="submit" onclick="setLans()">Click to enter number of Hosts per LAN</button></div>
+<div> <button id="submit" type="submit">Click to enter number of Hosts per LAN</button></div>
 
-<div id="container"></div>
+<form action="inDatabase.php" method="POST">
+    <div id="container"></div>
+    <div id="tosql"></div>
+</form>
+
 
 <div id="sendTo"></div>
 <div id="innertable"></div>
 
-<form action="index.html" method="POST" name="todatabase">
-    <div id="reload"></div>
 </form>
-<form action="inDatabase.php" method="POST">
-    <div id="todatabase"></div>
+<form action="toSQL.js" method="POST">
+
 </form>
+<div id="reload"></div>
+
+
+
 </body>
 
 </html>
