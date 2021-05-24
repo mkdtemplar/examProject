@@ -26,6 +26,8 @@ button {
     padding: 2px;
     font: 15px "Exo 2", sans-serif;
     text-align: center;
+    justify-content: center;
+    align-items: center;
 }
 
 body {
@@ -56,4 +58,9 @@ tr:nth-child(even) {
 
 tr:first-child {
     background-color: lightgreen;
+}
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

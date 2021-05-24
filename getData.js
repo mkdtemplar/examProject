@@ -13,7 +13,6 @@ $(document).ready(function () {
     });
 });
 
-
 var data = {};
 var subnets = [1, 2, 4, 8, 16, 32, 64, 128, 256];
 var hosts = [256, 128, 64, 32, 16, 8, 4, 2, 1];
@@ -80,8 +79,6 @@ function getSubAndMask() {
 
     var innerTable = "";
 
-    var rangeIP = "";
-
     hostsPerLan.sort(function (a, b) {
         return a - b;
     });
@@ -104,8 +101,6 @@ function getSubAndMask() {
 
     var fourthOctet = parseInt(document.getElementById("fourthoctet").value);
 
-    var resetFourthOctet = fourthOctet;
-
     for (var i = 0; i < hostsPerLan.length; i++) {
 
         var subnetIndex = hosts.indexOf(hostsPerLan[i]);
@@ -119,22 +114,7 @@ function getSubAndMask() {
         innerTable += "<td>" + firstoctet + "." + secondoctet + "." + thirdoctet + "." + (fourthOctet + 1) + " - " + firstoctet +
             "." + secondoctet + "." + thirdoctet + "." + (fourthOctet + hostsPerLan[i] - 2) + "</td>" + "</tr>" + "\n";
 
-        var toLanArraynetID = firstoctet + "." + secondoctet + "." + thirdoctet + "." + fourthOctet;
-
-        var rangeIP = firstoctet + "." + secondoctet + "." + thirdoctet + "." + (fourthOctet + 1) + " - " + firstoctet +
-            "." + secondoctet + "." + thirdoctet + "." + (fourthOctet + hostsPerLan[i] - 2);
-
-        data[i] = [];
-        data[i][0] = toLanArraynetID;
-        data[i][1] = subMaskNo;
-        data[i][2] = hostsPerLan[i];
-        data[i][3] = subnetNo;
-        data[i][4] = rangeIP;
-
         fourthOctet += hostsPerLan[i];
-        if (fourthOctet >= 254) {
-            fourthOctet = resetFourthOctet;
-        }
     }
 
     innerTable += "</tbody></table>" + "\n";
@@ -143,8 +123,6 @@ function getSubAndMask() {
 
     $(document).ready(function () {
         $("#reload").append("<a href='index.html'><button>Click for new calculation</button></a>")
-        $("#tosql").append("<button type = 'submit'>Save to MySQL</button>")
-
     });
 }
 

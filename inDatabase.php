@@ -7,10 +7,18 @@
     print("<meta name='viewport' content='width=device-width, initial-scale=1.0' />");
     print("</head><body>");
     
-    $first = $_POST["first"] ? : "";
-    $second = $_POST["second"] ? : "";
-    $third = $_POST["third"] ? : "";
-    $fourth = $_POST["fourth"] ? : "";
+    if (isset($_POST)) {
+        $first = $_POST["first"] ? : "";
+    }
+    if (isset($_POST)) {
+        $second = $_POST["second"] ? : "";
+    }
+    if (isset($_POST)) {
+        $third = $_POST["third"] ? : "";
+    }
+    if (isset($_POST)) {
+        $fourth = $_POST["fourth"] ? : "";
+    }
     
     $subnets = [1, 2, 4, 8, 16, 32, 64, 128, 256];
     $hosts = [256, 128, 64, 32, 16, 8, 4, 2, 1];
@@ -52,7 +60,7 @@
     {
         print ($lanHosts. "<br>");
     }
-    
+    print ("<br><p>Number of lans:</p>". $numLANS);
     
     $db_host = 'localhost';
     $db_username = 'root';
@@ -81,7 +89,7 @@
             print("<p>Could not execute query!</p></body></html>");
             die(mysqli_error($database));
         }
-    
+    $fourth += $lanHostArray[$q];
     }
     mysqli_close($database);
     print("</body></html>");
