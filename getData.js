@@ -2,8 +2,10 @@
 var lanHostsArray = Array();
 var hostsPerLan = Array();
 
-$(document).ready(function () {
-    $("#submit").click(function () {
+$(document).ready(function ()
+{
+    $("#submit").click(function ()
+    {
         var num = parseInt(document.getElementById("numberOfLAN").value);
         for (var i = 1; i <= num; i++) {
             $("#container").append(
@@ -13,17 +15,17 @@ $(document).ready(function () {
     });
 });
 
-var data = {};
 var subnets = [1, 2, 4, 8, 16, 32, 64, 128, 256];
 var hosts = [256, 128, 64, 32, 16, 8, 4, 2, 1];
 var submask = [24, 25, 26, 27, 28, 29, 30, 31, 32];
 
-function validateForm() {
-    var firstoctet = document.forms["myForm"]["first"].value;
-    var secondoctet = document.forms["myForm"]["second"].value;
-    var thirdoctet = document.forms["myForm"]["third"].value;
-    var fourthoctet = document.forms["myForm"]["fourth"].value;
-    var numberOfLAN = document.forms["myForm"]["numberOfLAN"].value;
+function validateForm()
+{
+    var firstoctet = parseInt(document.forms["myform"]["first"].value);
+    var secondoctet = parseInt(document.forms["myform"]["second"].value);
+    var thirdoctet = parseInt(document.forms["myform"]["third"].value);
+    var fourthoctet = parseInt(document.forms["myform"]["fourth"].value);
+    var numberOfLAN = parseInt(document.forms["myform"]["numberOfLAN"].value);
 
     if (isNaN(firstoctet) || isNaN(secondoctet) || isNaN(thirdoctet) || isNaN(fourthoctet) || isNaN(numberOfLAN)
         || firstoctet < 0 || firstoctet > 255 || secondoctet < 0 || secondoctet > 255
@@ -33,9 +35,8 @@ function validateForm() {
     }
 }
 
-function numLans() {
-
-
+function numLans()
+{
     var input = document.getElementsByName("lan[]");
 
     for (var i = 0; i < input.length; i++) {
@@ -43,7 +44,8 @@ function numLans() {
     }
 }
 
-function sumHosts() {
+function sumHosts()
+{
     var sumOfHosts = 0;
     for (var i = 0; i < lanHostsArray.length; i++) {
         sumOfHosts += lanHostsArray[i];
@@ -55,7 +57,8 @@ function sumHosts() {
     }
 }
 
-function lanHosts() {
+function lanHosts()
+{
     for (var j = 0; j < lanHostsArray.length; j++) {
         if (lanHostsArray[j] <= 8) {
             lanHostsArray[j] += 2;
@@ -63,8 +66,8 @@ function lanHosts() {
     }
 }
 
-function setHosts() {
-
+function setHosts()
+{
     for (var i = 0; i < lanHostsArray.length; i++) {
 
         for (var index = 0; index < hosts.length; index++) {
@@ -75,8 +78,8 @@ function setHosts() {
     }
 }
 
-function getSubAndMask() {
-
+function getSubAndMask()
+{
     var innerTable = "";
 
     hostsPerLan.sort(function (a, b) {
