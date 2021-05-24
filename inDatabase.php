@@ -9,17 +9,20 @@
     print("</head><body>");
     
     
+    $hostsPerLan = array();
+    $i = 0;
     
-    /*
-    $data = json_decode($_POST['data'], true);
-    count($_POST['data']);
-    count($_POST['data'][5]);
-    */
     print_r($_POST);
     foreach ($_POST['lan'] as $lans) {
-        print ($_POST. "<br>");
+        print ($lans . "<br>");
+        
+        $hostsPerLan[$i] = $lans;
+        $i++;
     }
-    
+    foreach ($hostsPerLan as $hosts)
+    {
+        print ($hosts. "<br>");
+    }
     /*
     
     $db_host = 'localhost';
