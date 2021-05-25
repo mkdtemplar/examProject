@@ -2,6 +2,10 @@
 var lanHostsArray = Array();
 var hostsPerLan = Array();
 
+function addFiels()
+{
+
+}
 $(document).ready(function ()
 {
     $("#submit").click(function ()

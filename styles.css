@@ -60,7 +60,6 @@ tr:first-child {
     background-color: lightgreen;
 }
 .center {
-    display: flex;
     justify-content: center;
     align-items: center;
 }
