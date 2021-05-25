@@ -7,24 +7,24 @@
     print("<meta name='viewport' content='width=device-width, initial-scale=1.0' />");
     print("</head><body>");
     
-    if (isset($_POST)) {
-        $first = $_POST["first"] ? : "";
-    }
-    if (isset($_POST)) {
-        $second = $_POST["second"] ? : "";
-    }
-    if (isset($_POST)) {
-        $third = $_POST["third"] ? : "";
-    }
-    if (isset($_POST)) {
-        $fourth = $_POST["fourth"] ? : "";
-    }
     
+        $first =$_POST["first"] ? : "";
+        settype($first, "integer");
+        
+        $second = $_POST["second"] ? : "";
+        settype($second, "integer");
+   
+        $third = $_POST["third"] ? : "";
+        settype($third, "integer");
+  
+   
+        $fourth = $_POST["fourth"] ? : "";
+        settype($fourth, "integer");
+        
+    print ($first. "<br>");
     $subnets = [1, 2, 4, 8, 16, 32, 64, 128, 256];
     $hosts = [256, 128, 64, 32, 16, 8, 4, 2, 1];
     $submask = [24, 25, 26, 27, 28, 29, 30, 31, 32];
-    
-    $numLANS = "" ?? $_POST["numberOfLANS"];
     
     $hostsPerLan = array();
     $lanHostArray = array();
@@ -60,7 +60,8 @@
     {
         print ($lanHosts. "<br>");
     }
-    print ("<br><p>Number of lans:</p>". $numLANS);
+    
+    print (count($lanHostArray). "<br>");
     
     $db_host = 'localhost';
     $db_username = 'root';
@@ -74,22 +75,25 @@
     if (!mysqli_select_db($database, "$db_name")) {
         die("<p>Could not open products database </p></body></html>");
     }
-    
-    for ($q = 0; count($lanHostArray); $q++) {
+    $length = count($lanHostArray);
+    for ($q = 0; $q < $length; $q++)
+    {
         $key = array_search($lanHostArray[$q], $lanHostArray);
         $numberOfSubNets = $subnets[$key];
         $subMaskNo = $submask[$key];
-    
+        
         $networkID = $first . "." . $second . "." . $third . "." . $fourth;
-        $rangeOfIp = $first . "." . $second . "." . $third . "." . ($fourth + 1) . " - " . $first . "." . $second . "." . $third . "." . ($fourth + $lanHostArray[$q] - 2);
+        $rangeOfIp = $first . "." . $second . "." . $third . "." . $fourth + 1 . " - " . $first . "." . $second . "." . $third . "." . (($fourth + $lanHostArray[$q]) - 2);
         $query = "insert into vlsm (NetworkID, SubnetMask, NumberOfHostsPerSubnet, NumberOfSubnets, RangeOfUsableIPaddresses)
                   values ('$networkID', '$subMaskNo', '$lanHostArray[$q]', '$numberOfSubNets', '$rangeOfIp')";
     
-        if (!($result = mysqli_query($database, $query))) {
+        if (!(mysqli_query($database, $query))) {
             print("<p>Could not execute query!</p></body></html>");
             die(mysqli_error($database));
         }
     $fourth += $lanHostArray[$q];
     }
+    
     mysqli_close($database);
+    
     print("</body></html>");
