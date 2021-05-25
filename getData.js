@@ -2,21 +2,6 @@
 var lanHostsArray = Array();
 var hostsPerLan = Array();
 
-
-/*
-$(document).ready(function ()
-{
-    $("#submit").click(function ()
-    {
-        var num = parseInt(document.getElementById("numberOfLAN").value);
-        for (var i = 1; i <= num; i++) {
-            $("#container").append(
-                "<label>LAN: " + i + "</label><input type='number' placeholder='Number of hosts' name = 'lan[]'><br>");
-        }
-        $("#sendTo").append("<button id='senddata' type='submit'  onclick= 'sumHosts (); numLans(); lanHosts(); setHosts(); getSubAndMask()'>Calculate VLSM</button>");
-    });
-});
-*/
 var subnets = [1, 2, 4, 8, 16, 32, 64, 128, 256];
 var hosts = [256, 128, 64, 32, 16, 8, 4, 2, 1];
 var submask = [24, 25, 26, 27, 28, 29, 30, 31, 32];
@@ -125,9 +110,5 @@ function getSubAndMask()
     innerTable += "</tbody></table>" + "\n";
 
     document.getElementById("innertable").innerHTML = innerTable;
-
-    $(document).ready(function () {
-        $("#reload").append("<a href='index.html'><button>Click for new calculation</button></a>")
-    });
 }
 
