@@ -53,10 +53,6 @@
         }
     }
     rsort($lanHostArray);
-    foreach ($lanHostArray as $lanHosts)
-    {
-        print ($lanHosts. "<br>");
-    }
     
     $db_host = 'localhost';
     $db_username = 'root';
