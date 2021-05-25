@@ -20,13 +20,14 @@
     </div>
     
     <form method="post" action="inDatabase.php" id = "myform">
+        <label>Enter IP address: </label><input type="number" min="192" max="223" step="1" value="192" id="firstoctet" name="first" readonly />
+        <input type="number" min="0" max="255" step="1"  id="secondoctet" name="second" required/>
+        <input type="number" min="0" max="255" step="1" id="thirdoctet" name="third" required/>
+        <input type="number" min="0" max="255" step="1" id="fourthoctet" name="fourth" required/>
         <div class="row">
             <div class="col-lg-12">
                 <div id="inputFormRow">
-                    <label>Enter IP address: </label><input type="number" min="192" max="223" step="1" value="192" id="firstoctet" name="first" readonly />
-                    <input type="number" min="0" max="255" step="1"  id="secondoctet" name="second" required/>
-                    <input type="number" min="0" max="255" step="1" id="thirdoctet" name="third" required/>
-                    <input type="number" min="0" max="255" step="1" id="fourthoctet" name="fourth" required/>
+                    
                     <div class="input-group mb-3">
                         <input type="number" name="lan[]" class="form-control m-input" placeholder="Enter number of Hosts" autocomplete="off" required>
                         <div class="input-group-append">
