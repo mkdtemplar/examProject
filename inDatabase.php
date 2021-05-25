@@ -21,7 +21,6 @@
         $fourth = $_POST["fourth"] ? : "";
         settype($fourth, "integer");
         
-    print ($first. "<br>");
     $subnets = [1, 2, 4, 8, 16, 32, 64, 128, 256];
     $hosts = [256, 128, 64, 32, 16, 8, 4, 2, 1];
     $submask = [24, 25, 26, 27, 28, 29, 30, 31, 32];
@@ -30,10 +29,8 @@
     $lanHostArray = array();
     $i = 0;
     
-    print_r($_POST);
-    foreach ($_POST['lan'] as $lans) {
-        print ($lans . "<br>");
-        
+    foreach ($_POST['lan'] as $lans)
+    {
         $hostsPerLan[$i] = (int)$lans;
         if ($hostsPerLan[$i] <= 8)
         {
@@ -42,7 +39,7 @@
         $i++;
     }
     
-    print ("<br><p>HOSTS PER LAN</p>");
+   
     
    
     for ($j = 0; $j < count($hostsPerLan) ; $j++)
@@ -60,8 +57,6 @@
     {
         print ($lanHosts. "<br>");
     }
-    
-    print (count($lanHostArray). "<br>");
     
     $db_host = 'localhost';
     $db_username = 'root';
@@ -91,9 +86,11 @@
             print("<p>Could not execute query!</p></body></html>");
             die(mysqli_error($database));
         }
+        
     $fourth += $lanHostArray[$q];
     }
     
     mysqli_close($database);
-    
+    print ("<p>Results of calculations successfully stored in database</p>");
+    print ("<a href='index.html'><button type='button'>CLICK TO RETURN TO MAIN PAGE</button></a>");
     print("</body></html>");

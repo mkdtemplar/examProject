@@ -8,18 +8,39 @@ var submask = [24, 25, 26, 27, 28, 29, 30, 31, 32];
 
 function validateForm()
 {
-    var firstoctet = parseInt(document.forms["myform"]["first"].value);
-    var secondoctet = parseInt(document.forms["myform"]["second"].value);
-    var thirdoctet = parseInt(document.forms["myform"]["third"].value);
-    var fourthoctet = parseInt(document.forms["myform"]["fourth"].value);
-    var numberOfLAN = parseInt(document.forms["myform"]["numberOfLAN"].value);
+    var secondoctet = parseInt(document.getElementById("secondoctet").value);
+    var thirdoctet = parseInt(document.getElementById("thirdoctet").value);
+    var fourthoctet =  parseInt(document.getElementById("fourthoctet").value);
+    var form =document.getElementById("myform");
 
-    if (isNaN(firstoctet) || isNaN(secondoctet) || isNaN(thirdoctet) || isNaN(fourthoctet) || isNaN(numberOfLAN)
-        || firstoctet < 0 || firstoctet > 255 || secondoctet < 0 || secondoctet > 255
-        || thirdoctet < 0 || thirdoctet > 255 || fourthoctet < 0 || fourthoctet > 255 || numberOfLAN < 0) {
-        alert("Octets must be numbers and/or greather than zaro and/or less than 255");
-        return false;
+    form.addEventListener("submit", (e) =>{
+        if ( isNaN(secondoctet) || isNaN(thirdoctet) || isNaN(fourthoctet) || isNaN(numberOfLAN)
+            ||  secondoctet < 0 || secondoctet > 255 || thirdoctet < 0 || thirdoctet > 255 || fourthoctet < 0 || fourthoctet > 255 ||  sumHosts() > 255)
+        {
+            alert("Octets must be numbers and/or greater than zero and/or less than 255");
+        }
+        e.preventDefault();
+    })
+
+
+}
+
+function resetForm()
+{
+    document.getElementById("myform").reset();
+}
+
+function sumHosts()
+{
+    var sum = 0;
+
+    var lans = document.getElementsByName("lan[]");
+    for (var i = 0; i < lans.length; i++)
+    {
+            sum += parseInt(lans[i].value);
     }
+    sum += parseInt(lans[lans.length - 1].value);
+    return sum;
 }
 
 function numLans()
@@ -109,6 +130,8 @@ function getSubAndMask()
 
     innerTable += "</tbody></table>" + "\n";
 
-    document.getElementById("innertable").innerHTML = innerTable;
+   var output =  document.getElementById("innertable");
+
+   output.innerHTML = innerTable;
 }
 

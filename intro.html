@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset = "UTF-8">
+    <title>Introduction</title>
+</head>
+<body>
+
+<p style="margin: 6px 12px 3px 4px; text-align: justify" >
+    VLSM stands for Variable Length Subnet Mask where the subnet design uses more than one mask in the same network
+    which means more than one mask is used for different subnets of a single class A, B, C or a network. It is used
+    to increase the usability of subnets as they can be of variable size. It is also defined as the process of subnetting
+    of a subnet.<br>
+    <span style="font-weight: bold">Procedure of implementing VLSM –</span><br>
+    In VLSM, subnets use block size based on requirement so subnetting is required multiple times. Suppose there is an
+    administrator that has four departments to manage. These are sales and purchase department with 120 computers,
+    development department with 50 computers, accounts department with 26 computers and management department with
+    5 computers.
+    If the administrator has IP 192.168.1.0/24, department wise IPs can be allocated by following these steps:<br>
+    
+    1. For each segment select the block size that is greater than or equal to the actual requirement which is
+    the sum of host addresses, broadcast addresses and network addresses. Make a list of subnets possible:<br>
+    
+    2. Arrange all the segments in descending order based on the block size that is from highest to lowest requirement<br>
+    
+    3. The highest IP available has to be allocated to highest requirement so the sales and purchase department
+    gets 192.168.1.0/25 which has 126 valid addresses that can easily be available for 120 hosts.
+    The subnet mask used is 255.255.255.128. <br>
+    
+    4. The next segment requires an IP to handle 50 hosts. The IP subnet with network number 192.168.1.128/26 is the
+    next highest which can be assigned to 62 hosts thus fulfilling the requirement of development department.
+    The subnet mask used is 255.255.255.192. <br>
+    
+    5. Similarly the next IP subnet 192.168.1.192/27 can fulfill the requirements of accounts department as it has
+       30 valid hosts IP which can be assigned to 26 computers.The mask used is 255.255.255.224. <br>
+    
+    6. The last segment requires 5 valid hosts IP which can be fulfilled by the subnet 192.168.1.224/29 which has the
+    mask as 255.255.255.248 is chosen as per the requirement. The IP with the mask 255.255.255.240 could be chosen but
+    it has 14 valid hosts IPs and the requirement is less in comparison so the one that is comparable with the
+    requirement is chosen . Thus there is less IP wastage in VLSM as compared to FLSM.<br>
+    
+    <span style="font-weight: bold">Advantages of VLSM over FLSM –</span><br>
+    1. In Fixed length subnet mask subnetting (FLSM), all subnets are of equal size and have equal number of hosts
+    but in VLSM the size is variable and it can have variable number of hosts thus making the IP addressing more
+    efficient by allowing a routed system of different mask length to suit requirements.<br>
+    
+    2. In FLSM there is a wastage of IP addresses but in VLSM there is a minimum wastage of IP addresses.<br>
+    
+    3. FLSM is preferred for private IP addresses while for public IP addresses VLSM is the best option.
+    
+</p>
+</body>
+</html>

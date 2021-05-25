@@ -1,0 +1,86 @@
+html, body { height: 100%;}
+
+header {
+    
+    text-align: center;
+    font-family: arial, sans-serif, helvetica;
+    padding: .2em;
+    font-weight: bold;
+    color: royalblue;
+    text-shadow: 5px 5px 10px red;
+    font-size: 150%;
+    background: lightskyblue;
+}
+nav {
+    font-weight: bold;
+    color: white;
+    border: 2px solid royalblue;
+    text-align: center;
+    width: 10em;
+    background-color: royalblue;
+}
+
+nav ul {
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav:hover ul {
+    display: block;
+}
+
+nav ul li:hover {
+    border-top: 2px solid royalblue;
+    background-color: white;
+    width: 10em;
+    color: black;
+}
+
+nav ul li:hover {
+    background-color: powderblue;
+}
+
+a {
+    text-decoration: none;
+}
+input:hover {
+    border-collapse: collapse;
+    background-color: powderblue;
+}
+
+label, datalist, list, option {
+    width: 8em;
+    float: left;
+}
+
+.left {
+    float: left;
+    width: 75%;
+    height: 100%;
+    box-sizing: border-box;
+    position: relative;
+    border: 1px crimson;
+    
+}
+
+.right {
+    float: right;
+    width: 25%;
+    height: 100%;
+    box-sizing: border-box;
+    position: relative;
+    border: 1px crimson;
+}
+
+.floated {
+    background-color: lightskyblue;
+    font-family: arial, helvetica, sans-serif;
+    
+}
+
+div {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
