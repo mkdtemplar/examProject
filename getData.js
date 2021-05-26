@@ -8,21 +8,16 @@ var submask = [24, 25, 26, 27, 28, 29, 30, 31, 32];
 
 function validateForm()
 {
-    var secondoctet = parseInt(document.getElementById("secondoctet").value);
-    var thirdoctet = parseInt(document.getElementById("thirdoctet").value);
-    var fourthoctet =  parseInt(document.getElementById("fourthoctet").value);
-    var form =document.getElementById("myform");
+    var secondoctet = document.forms["myform"]["second"].value;
+    var thirdoctet =  document.forms["myform"]["third"].value;
+    var fourthoctet =   document.forms["myform"]["fourth"].value;
 
-    form.addEventListener("submit", (e) =>{
-        if ( isNaN(secondoctet) || isNaN(thirdoctet) || isNaN(fourthoctet) || isNaN(numberOfLAN)
-            ||  secondoctet < 0 || secondoctet > 255 || thirdoctet < 0 || thirdoctet > 255 || fourthoctet < 0 || fourthoctet > 255 ||  sumHosts() > 255)
+    if ( isNaN(secondoctet) || isNaN(thirdoctet) || isNaN(fourthoctet) ||  secondoctet < 0 || secondoctet > 255
+        || thirdoctet < 0 || thirdoctet > 255 || fourthoctet < 0 || fourthoctet > 255 ||  sumHosts() > 255)
         {
             alert("Octets must be numbers and/or greater than zero and/or less than 255");
+            return false;
         }
-        e.preventDefault();
-    })
-
-
 }
 
 function resetForm()
