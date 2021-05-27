@@ -91,10 +91,10 @@ function getSubAndMask()
 
     hostsPerLan.reverse();
 
-    innerTable += "<table>" + "\n";
-    innerTable += "<caption>Results of VLSM</caption>" + "\n";
-    innerTable += "<thead>" + "\n";
-    innerTable += "<tr>" + "\n";
+    innerTable += "<table>";
+    innerTable += "<caption>Results of VLSM</caption>";
+    innerTable += "<thead>";
+    innerTable += "<tr>";
 
     innerTable +=
         "<th>Network ID</th><th>Subnet Mask</th><th>Number of Hosts per subnet</th>" +
@@ -118,15 +118,12 @@ function getSubAndMask()
             subMaskNo + "</td>" + "<td>" + hostsPerLan[i] + "</td>" + "<td>" + "LAN: " + (i + 1) + "</td>" + "<td>" + subnetNo + "</td>";
 
         innerTable += "<td>" + firstoctet + "." + secondoctet + "." + thirdoctet + "." + (fourthOctet + 1) + " - " + firstoctet +
-            "." + secondoctet + "." + thirdoctet + "." + (fourthOctet + hostsPerLan[i] - 2) + "</td>" + "</tr>" + "\n";
+            "." + secondoctet + "." + thirdoctet + "." + (fourthOctet + hostsPerLan[i] - 2) + "</td>" + "</tr>";
 
         fourthOctet += hostsPerLan[i];
     }
 
-    innerTable += "</tbody></table>" + "\n";
-
-   var output =  document.getElementById("innertable");
-
-   output.innerHTML = innerTable;
+    innerTable += "</tbody></table>";
+    $("#innertable").append(innerTable);
 }
 

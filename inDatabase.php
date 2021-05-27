@@ -49,6 +49,7 @@
             if (($hostsPerLan[$j] <= $hosts[$index]) && ($hostsPerLan[$j] >= $hosts[$index + 1]))
             {
                 $lanHostArray[$j] = $hosts[$index];
+                print ($lanHostArray[$j]. "<br>");
             }
         }
     }
@@ -69,7 +70,7 @@
     $length = count($lanHostArray);
     for ($q = 0; $q < $length; $q++)
     {
-        $key = array_search($lanHostArray[$q], $lanHostArray);
+        $key = array_search($lanHostArray[$q], $hosts);
         $numberOfSubNets = $subnets[$key];
         $subMaskNo = $submask[$key];
         
