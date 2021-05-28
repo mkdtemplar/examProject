@@ -15,9 +15,24 @@ function validateForm()
     if ( isNaN(secondoctet) || isNaN(thirdoctet) || isNaN(fourthoctet) ||  secondoctet < 0 || secondoctet > 255
         || thirdoctet < 0 || thirdoctet > 255 || fourthoctet < 0 || fourthoctet > 255 ||  sumHosts() > 255)
         {
-            alert("Octets must be numbers and/or greater than zero and/or less than 255");
+            //alert("Octets must be numbers and/or greater than zero and/or less than 255");
             return false;
         }
+    else return true;
+}
+
+function test ()
+{
+    if (validateForm() == true)
+    {
+        sumHosts (); numLans(); lanHosts(); setHosts(); getSubAndMask();
+    }
+
+    else
+    {
+        alert("Octets must be numbers and/or greater than zero and/or less than 255");
+        resetForm();
+    }
 }
 
 function resetForm()
@@ -34,7 +49,6 @@ function sumHosts()
     {
             sum += parseInt(lans[i].value);
     }
-    sum += parseInt(lans[lans.length - 1].value);
     return sum;
 }
 
@@ -44,19 +58,6 @@ function numLans()
 
     for (var i = 0; i < input.length; i++) {
         lanHostsArray[i] = parseInt(input[i].value);
-    }
-}
-
-function sumHosts()
-{
-    var sumOfHosts = 0;
-    for (var i = 0; i < lanHostsArray.length; i++) {
-        sumOfHosts += lanHostsArray[i];
-    }
-
-    if (sumOfHosts > 253) {
-        alert("Number of total hosts exceeds IP range");
-        return false;
     }
 }
 
