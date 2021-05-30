@@ -15,7 +15,7 @@ function validateForm()
     var fourthoctet =   document.forms["myform"]["fourth"].value;
 
     if ( isNaN(secondoctet) || isNaN(thirdoctet) || isNaN(fourthoctet) ||  secondoctet < 0 || secondoctet > 255
-        || thirdoctet < 0 || thirdoctet > 255 || fourthoctet < 0 || fourthoctet > 255 ||  sumHosts() > 255)
+        || thirdoctet < 0 || thirdoctet > 255 || fourthoctet < 0 || fourthoctet > 255 ||  sumHosts() > 0)
         {
             //alert("Octets must be numbers and/or greater than zero and/or less than 255");
             return false;
@@ -30,13 +30,17 @@ function resetForm()
 
 function sumHosts()
 {
+    var fourthOctet = parseInt(document.getElementById("fourthoctet").value);
     var sum = 0;
+    var totalAvaleableHosts = 0
 
     var lans = document.getElementsByName("lan[]");
     for (var i = 0; i < lans.length; i++)
     {
             sum += parseInt(lans[i].value);
     }
+    totalAvaleableHosts = fourthOctet - 255;
+    sum += totalAvaleableHosts;
     return sum;
 }
 
