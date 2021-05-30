@@ -49,7 +49,6 @@
             if (($hostsPerLan[$j] <= $hosts[$index]) && ($hostsPerLan[$j] >= $hosts[$index + 1]))
             {
                 $lanHostArray[$j] = $hosts[$index];
-                print ($lanHostArray[$j]. "<br>");
             }
         }
     }

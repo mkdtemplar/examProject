@@ -41,8 +41,8 @@
                 <div id="newRow"></div>
                 <button id="addRow" type="button" class="btn btn-info">Add Network</button>
                 <button type="submit" class="btn btn-info">Submit data</button>
-                <button id='senddata' type='button' class="btn btn-info" onclick= 'test()'>Calculate VLSM</button>
-                <button type="reset" class="btn btn-info">New calculation</button>
+                <button id='senddata' type='button' class="btn btn-info" data-toggle="modal" data-target="#myModal" onclick="test()">Calculate VLSM</button>
+                <button type="reset" class="btn btn-info" >New calculation</button>
             </div>
         </div>
         <div> </div>
@@ -50,8 +50,36 @@
 </div>
 
 <br><br><br>
-<div class="center" id="innertable"></div>
 
+<div class="container mt-3">
+    
+    <!-- The Modal -->
+    <div class="modal fade" id="myModal" style="text-align: center">
+        <div class="modal-dialog" style="max-width: 100%; width: auto; display: inline-block;">
+            <div class="modal-content">
+                
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Results of VLSM</h4>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+                
+                <!-- Modal body -->
+                <div class="modal-body">
+                
+                </div>
+                
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+
+</div>
+<div id="innertable"></div>
 <script type="text/javascript">
     // add row
     $("#addRow").click(function () {

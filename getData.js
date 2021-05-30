@@ -6,6 +6,8 @@ var subnets = [1, 2, 4, 8, 16, 32, 64, 128, 256];
 var hosts = [256, 128, 64, 32, 16, 8, 4, 2, 1];
 var submask = [24, 25, 26, 27, 28, 29, 30, 31, 32];
 
+var innerTable = "";
+
 function validateForm()
 {
     var secondoctet = document.forms["myform"]["second"].value;
@@ -19,20 +21,6 @@ function validateForm()
             return false;
         }
     else return true;
-}
-
-function test ()
-{
-    if (validateForm() == true)
-    {
-        sumHosts (); numLans(); lanHosts(); setHosts(); getSubAndMask();
-    }
-
-    else
-    {
-        alert("Octets must be numbers and/or greater than zero and/or less than 255");
-        resetForm();
-    }
 }
 
 function resetForm()
@@ -84,22 +72,20 @@ function setHosts()
 
 function getSubAndMask()
 {
-    var innerTable = "";
-
     hostsPerLan.sort(function (a, b) {
         return a - b;
     });
 
     hostsPerLan.reverse();
 
-    innerTable += "<table>";
+    innerTable += "<table class='table-primary table-striped caption-top'>";
     innerTable += "<caption>Results of VLSM</caption>";
     innerTable += "<thead>";
     innerTable += "<tr>";
 
     innerTable +=
-        "<th>Network ID</th><th>Subnet Mask</th><th>Number of Hosts per subnet</th>" +
-        "<th>LAN</th><th>Number of subnets</th><th>Range of usable IP addresses</th></tr></thead>" +
+        "<th scope='col'>Network ID</th><th scope='col'>Subnet Mask</th><th scope='col'>Number of Hosts per subnet</th>" +
+        "<th scope='col'>LAN</th><th scope='col'>Number of subnets</th><th scope='col'>Range of usable IP addresses</th></tr></thead>" +
         "<tbody>";
 
     var firstoctet = parseInt(document.getElementById("firstoctet").value);
@@ -125,6 +111,21 @@ function getSubAndMask()
     }
 
     innerTable += "</tbody></table>";
-    $("#innertable").append(innerTable);
+    //$("#innertable").html(innerTable);
+    $(".modal-body").append(innerTable);
+    $("#myModal").modal('show');
 }
 
+function test ()
+{
+    if (validateForm() == true)
+    {
+        sumHosts (); numLans(); lanHosts(); setHosts(); getSubAndMask();
+    }
+
+    else
+    {
+        alert("Octets must be numbers and/or greater than zero and/or less than 255");
+        resetForm();
+    }
+}
