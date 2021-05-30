@@ -111,7 +111,6 @@ function getSubAndMask()
     }
 
     innerTable += "</tbody></table>";
-    //$("#innertable").html(innerTable);
     $(".modal-body").append(innerTable);
     $("#myModal").modal('show');
 }

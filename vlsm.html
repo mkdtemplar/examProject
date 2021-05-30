@@ -61,7 +61,7 @@
                 <!-- Modal Header -->
                 <div class="modal-header">
                     <h4 class="modal-title">Results of VLSM</h4>
-                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <button type="button" class="close" data-dismiss="modal" id="closeModalX">×</button>
                 </div>
                 
                 <!-- Modal body -->
@@ -71,7 +71,7 @@
                 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" id="closeModal">Close</button>
                 </div>
             
             </div>
@@ -98,6 +98,14 @@
     // remove row
     $(document).on('click', '#removeRow', function () {
         $(this).closest('#inputFormRow').remove();
+    });
+
+    $("#closeModal").click(function(){
+        $("#myModal").modal('hide');
+    });
+
+    $("#closeModalX").click(function(){
+        $("#myModal").modal('hide');
     });
 </script>
 
