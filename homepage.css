@@ -17,7 +17,7 @@ nav {
     border: 2px solid royalblue;
     text-align: center;
     width: 10em;
-    background-color: royalblue;
+    background-color: lightcoral;
 }
 
 nav ul {
@@ -39,7 +39,7 @@ nav ul li:hover {
 }
 
 nav ul li:hover {
-    background-color: powderblue;
+    background-color: lightskyblue;
 }
 
 a {
@@ -47,7 +47,7 @@ a {
 }
 input:hover {
     border-collapse: collapse;
-    background-color: powderblue;
+    background-color: red;
 }
 
 label, datalist, list, option {

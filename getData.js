@@ -6,8 +6,6 @@ var subnets = [1, 2, 4, 8, 16, 32, 64, 128, 256];
 var hosts = [256, 128, 64, 32, 16, 8, 4, 2, 1];
 var submask = [24, 25, 26, 27, 28, 29, 30, 31, 32];
 
-var innerTable = "";
-
 function validateForm()
 {
     var secondoctet = document.forms["myform"]["second"].value;
@@ -17,7 +15,6 @@ function validateForm()
     if ( isNaN(secondoctet) || isNaN(thirdoctet) || isNaN(fourthoctet) ||  secondoctet < 0 || secondoctet > 255
         || thirdoctet < 0 || thirdoctet > 255 || fourthoctet < 0 || fourthoctet > 255 ||  sumHosts() > 0)
         {
-            //alert("Octets must be numbers and/or greater than zero and/or less than 255");
             return false;
         }
     else return true;
@@ -76,6 +73,7 @@ function setHosts()
 
 function getSubAndMask()
 {
+    var innerTable = "";
     hostsPerLan.sort(function (a, b) {
         return a - b;
     });
@@ -83,7 +81,6 @@ function getSubAndMask()
     hostsPerLan.reverse();
 
     innerTable += "<table class='table-primary table-striped caption-top'>";
-    innerTable += "<caption>Results of VLSM</caption>";
     innerTable += "<thead>";
     innerTable += "<tr>";
 
@@ -115,7 +112,7 @@ function getSubAndMask()
     }
 
     innerTable += "</tbody></table>";
-    $(".modal-body").append(innerTable);
+    $("#innertable").append(innerTable);
     $("#myModal").modal('show');
 }
 
@@ -128,7 +125,7 @@ function test ()
 
     else
     {
-        alert("Octets must be numbers and/or greater than zero and/or less than 255");
+        alert("Octets must be numbers and/or greater than zero and/or less than 255 or sum of hosts exceeds available IP address poll");
         resetForm();
     }
 }
