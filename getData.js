@@ -15,6 +15,7 @@ function validateForm()
     if ( isNaN(secondoctet) || isNaN(thirdoctet) || isNaN(fourthoctet) ||  secondoctet < 0 || secondoctet > 255
         || thirdoctet < 0 || thirdoctet > 255 || fourthoctet < 0 || fourthoctet > 255 ||  sumHosts() > 0)
         {
+            document.getElementById("myform").reset();
             return false;
         }
     else return true;
