@@ -47,7 +47,7 @@ a {
 }
 input:hover {
     border-collapse: collapse;
-    background-color: red;
+    background-color: white;
 }
 
 label, datalist, list, option {
@@ -57,7 +57,7 @@ label, datalist, list, option {
 
 .left {
     float: left;
-    width: 75%;
+    width: 80%;
     height: 100%;
     box-sizing: border-box;
     position: relative;
@@ -67,7 +67,7 @@ label, datalist, list, option {
 
 .right {
     float: right;
-    width: 25%;
+    width: 20%;
     height: 100%;
     box-sizing: border-box;
     position: relative;

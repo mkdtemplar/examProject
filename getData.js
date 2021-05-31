@@ -129,3 +129,8 @@ function test ()
         resetForm();
     }
 }
+
+function reFresh()
+{
+    $("#calculate").load("vlsm.html");
+}

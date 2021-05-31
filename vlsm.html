@@ -42,7 +42,7 @@
                 <button id="addRow" type="button" class="btn btn-info">Add Network</button>
                 <button type="submit" class="btn btn-info">Submit data</button>
                 <button id='senddata' type='button' class="btn btn-info" data-toggle="modal" data-target="#myModal" onclick="test()">Calculate VLSM</button>
-                <button type="reset" class="btn btn-info" >New calculation</button>
+                <button type="reset" class="btn btn-info" onclick="reFresh()">New calculation</button>
             </div>
         </div>
         <div> </div>
@@ -58,18 +58,16 @@
         <div class="modal-dialog" style="max-width: 100%; width: auto; display: inline-block;">
             <div class="modal-content">
                 
-                <!-- Modal Header -->
                 <div class="modal-header">
                     <h4 class="modal-title">Results of VLSM</h4>
                     <button type="button" class="close" data-dismiss="modal" id="closeModalX">×</button>
                 </div>
                 
-                <!-- Modal body -->
                 <div class="modal-body">
                     <div id="innertable"></div>
                 </div>
                 
-                <!-- Modal footer -->
+               
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal" id="closeModal">Close</button>
                 </div>
@@ -81,7 +79,7 @@
 </div>
 
 <script type="text/javascript">
-    // add row
+   
     $("#addRow").click(function () {
         var html = '';
         html += '<div id="inputFormRow">';
@@ -95,7 +93,6 @@
         $('#newRow').append(html);
     });
     
-    // remove row
     $(document).on('click', '#removeRow', function () {
         $(this).closest('#inputFormRow').remove();
     });
@@ -109,7 +106,6 @@
     {
         $("#myModal").modal('hide');
     });
-    
 </script>
 
 </body>
