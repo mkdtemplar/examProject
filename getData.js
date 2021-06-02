@@ -13,7 +13,8 @@ function validateForm()
     var fourthoctet =   document.forms["myform"]["fourth"].value;
 
     if ( isNaN(secondoctet) || isNaN(thirdoctet) || isNaN(fourthoctet) ||  secondoctet < 0 || secondoctet > 255
-        || thirdoctet < 0 || thirdoctet > 255 || fourthoctet < 0 || fourthoctet > 255 ||  sumHosts() > 0)
+        || thirdoctet < 0 || thirdoctet > 255 || fourthoctet < 0 || fourthoctet > 255 ||  sumHosts() > 0 ||
+        secondoctet == "" || thirdoctet == "" || fourthoctet == "")
         {
             document.getElementById("myform").reset();
             return false;
@@ -46,8 +47,18 @@ function numLans()
 {
     var input = document.getElementsByName("lan[]");
 
-    for (var i = 0; i < input.length; i++) {
-        lanHostsArray[i] = parseInt(input[i].value);
+    for (var i = 0; i < input.length; i++)
+    {
+        if (!isNaN(parseInt(input[i].value)) && parseInt(input[i].value) > 0)
+        {
+            lanHostsArray[i] = parseInt(input[i].value);
+        }
+        else
+        {
+            alert("You must enter value for network: " + (i + 1) + " and number of hosts must be greater than zero");
+            resetForm();
+            reFresh();
+        }
     }
 }
 
@@ -133,5 +144,6 @@ function test ()
 
 function reFresh()
 {
+    window.location = window.location;
     $("#calculate").load("vlsm.html");
 }
