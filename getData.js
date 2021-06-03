@@ -49,7 +49,7 @@ function numLans()
 
     for (var i = 0; i < input.length; i++)
     {
-        if (!isNaN(parseInt(input[i].value)) && parseInt(input[i].value) > 0)
+        if (!isNaN(parseInt(input[i].value)) && parseInt(input[i].value) > 0 && input[i].value != "")
         {
             lanHostsArray[i] = parseInt(input[i].value);
         }
