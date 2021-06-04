@@ -55,6 +55,10 @@ function numLans()
             alert("You must enter value for network: " + (i + 1) + " and number of hosts must be greater than zero");
             resetForm();
             reFresh();
+            $("#calculate").empty();
+            $("#readdb").empty();
+            $("#introduction").empty();
+            $("#calculate").load("vlsm.html");
         }
         else
         {
