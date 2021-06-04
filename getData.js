@@ -17,6 +17,7 @@ function validateForm()
         secondoctet == "" || thirdoctet == "" || fourthoctet == "")
         {
             document.getElementById("myform").reset();
+            reFresh();
             return false;
         }
     else return true;
@@ -49,15 +50,15 @@ function numLans()
 
     for (var i = 0; i < input.length; i++)
     {
-        if (!isNaN(parseInt(input[i].value)) && parseInt(input[i].value) > 0 && input[i].value != "")
-        {
-            lanHostsArray[i] = parseInt(input[i].value);
-        }
-        else
+        if (isNaN(input[i].value) || (input[i].value < 0) || (input[i].value == ""))
         {
             alert("You must enter value for network: " + (i + 1) + " and number of hosts must be greater than zero");
             resetForm();
             reFresh();
+        }
+        else
+        {
+            lanHostsArray[i] = parseInt(input[i].value);
         }
     }
 }
