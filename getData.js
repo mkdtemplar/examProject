@@ -7,15 +7,13 @@ var hosts = [256, 128, 64, 32, 16, 8, 4, 2, 1];
 var submask = [24, 25, 26, 27, 28, 29, 30, 31, 32];
 var cidrLastOctet = [0, 128, 192, 224, 240, 248, 252, 254, 255];
 
+
 function availableHosts()
 {
     var cidrNo = parseInt(document.getElementById("cidr").value);
     var cidrIndex = submask.indexOf(cidrNo);
-    var cidrLastO = cidrLastOctet[cidrIndex];
-
-    var totalAvelHosts = hosts[cidrIndex] - 2;
-
-    return totalAvelHosts;
+    var totalHosts = hosts[cidrIndex] - 2;
+    return totalHosts;
 }
 
 function networkID()
@@ -210,6 +208,7 @@ function getSubAndMask()
 
 function test ()
 {
+    var available = availableHosts();
     if (validateForm() === true)
     {
         sumHosts (); numLans(); lanHosts(); setHosts(); getSubAndMask();
@@ -217,7 +216,8 @@ function test ()
 
     else
     {
-        alert("Octets must be numbers and/or greater than zero and/or less than 255 or sum of hosts exceeds available IP address poll");
+        alert("Octets must be numbers and/or greater than zero and/or less than " + 255 + " or sum of hosts exceeds " +
+            "available IP address poll of: " + available);
         resetForm();
     }
 }
