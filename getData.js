@@ -5,16 +5,87 @@ var hostsPerLan = Array();
 var subnets = [1, 2, 4, 8, 16, 32, 64, 128, 256];
 var hosts = [256, 128, 64, 32, 16, 8, 4, 2, 1];
 var submask = [24, 25, 26, 27, 28, 29, 30, 31, 32];
+var cidrLastOctet = [0, 128, 192, 224, 240, 248, 252, 254, 255];
+
+function availableHosts()
+{
+    var cidrNo = parseInt(document.getElementById("cidr").value);
+    var cidrIndex = submask.indexOf(cidrNo);
+    var cidrLastO = cidrLastOctet[cidrIndex];
+
+    var totalAvelHosts = hosts[cidrIndex] - 2;
+
+    return totalAvelHosts;
+}
+
+function networkID()
+{
+    var cidrNo = parseInt(document.getElementById("cidr").value);
+    var cidrIndex = submask.indexOf(cidrNo);
+    var cidrLastO = cidrLastOctet[cidrIndex];
+    var cidrBinary = cidrLastO.toString(2);
+    var fourthOctet = parseInt(document.getElementById("fourthoctet").value);
+    var fourthBinary = fourthOctet.toString(2);
+    var res = "";
+    var forthArray = Array.from(fourthBinary);
+    var cidrArray = Array.from(cidrBinary);
+
+    var fourthLength = forthArray.length;
+    var cidrLength = cidrArray.length;
+
+    if (fourthLength < 8)
+    {
+        while (fourthLength < 8)
+        {
+            forthArray.unshift("0");
+            fourthLength++;
+        }
+    }
+
+    if (cidrLength < 8)
+    {
+        while (cidrLength < 8)
+        {
+            cidrArray.unshift("0");
+            cidrLength++;
+        }
+    }
+
+    for (var i = 0; i < 8; i ++)
+    {
+        if (forthArray[i] == 0 && cidrArray[i] == 0)
+        {
+            res += "0";
+        }
+        else if (forthArray[i] == 0 && cidrArray[i] == 1)
+        {
+            res += "0";
+        }
+        else if (forthArray[i] == 1 && cidrArray[i] == 0)
+        {
+            res += "0";
+        }
+        else if (forthArray[i] == 1 && cidrArray[i] == 1)
+        {
+            res += "1";
+        }
+    }
+
+    return parseInt(res, 2).toString(10);
+}
+
 
 function validateForm()
 {
     var secondoctet = document.forms["myform"]["second"].value;
     var thirdoctet =  document.forms["myform"]["third"].value;
     var fourthoctet =   document.forms["myform"]["fourth"].value;
+    var cidrNo = document.forms["myform"]["cid"].value;
 
     if ( isNaN(secondoctet) || isNaN(thirdoctet) || isNaN(fourthoctet) ||  secondoctet < 0 || secondoctet > 255
-        || thirdoctet < 0 || thirdoctet > 255 || fourthoctet < 0 || fourthoctet > 255 ||  sumHosts() > 0 ||
-        secondoctet == "" || thirdoctet == "" || fourthoctet == "")
+        || thirdoctet < 0 || thirdoctet > 255 || fourthoctet < 0 || fourthoctet > 255 ||
+        secondoctet == "" || thirdoctet == "" || fourthoctet == "" || isNaN(cidrNo) || cidrNo < 24 || cidrNo > 32
+        || sumHosts() < 0 || cidrNo == "")
         {
             document.getElementById("myform").reset();
             reFresh();
@@ -30,7 +101,6 @@ function resetForm()
 
 function sumHosts()
 {
-    var fourthOctet = parseInt(document.getElementById("fourthoctet").value);
     var sum = 0;
     var totalAvaleableHosts = 0
 
@@ -39,9 +109,8 @@ function sumHosts()
     {
             sum += parseInt(lans[i].value);
     }
-    totalAvaleableHosts = fourthOctet - 255;
-    sum += totalAvaleableHosts;
-    return sum;
+    totalAvaleableHosts = availableHosts() - sum;
+    return totalAvaleableHosts;
 }
 
 function numLans()
@@ -69,8 +138,10 @@ function numLans()
 
 function lanHosts()
 {
-    for (var j = 0; j < lanHostsArray.length; j++) {
-        if (lanHostsArray[j] <= 8) {
+    for (var j = 0; j < lanHostsArray.length; j++)
+    {
+        if (lanHostsArray[j] <= 8)
+        {
             lanHostsArray[j] += 2;
         }
     }
@@ -78,10 +149,13 @@ function lanHosts()
 
 function setHosts()
 {
-    for (var i = 0; i < lanHostsArray.length; i++) {
+    for (var i = 0; i < lanHostsArray.length; i++)
+    {
 
-        for (var index = 0; index < hosts.length; index++) {
-            if (lanHostsArray[i] <= hosts[index] && lanHostsArray[i] >= hosts[index + 1]) {
+        for (var index = 0; index < hosts.length; index++)
+        {
+            if (lanHostsArray[i] <= hosts[index] && lanHostsArray[i] >= hosts[index + 1])
+            {
                 hostsPerLan[i] = hosts[index];
             }
         }
@@ -110,22 +184,23 @@ function getSubAndMask()
     var secondoctet = parseInt(document.getElementById("secondoctet").value);
     var thirdoctet = parseInt(document.getElementById("thirdoctet").value);
 
-    var fourthOctet = parseInt(document.getElementById("fourthoctet").value);
+    var fourthoctet = parseInt(networkID());
 
-    for (var i = 0; i < hostsPerLan.length; i++) {
+    for (var i = 0; i < hostsPerLan.length; i++)
+    {
 
         var subnetIndex = hosts.indexOf(hostsPerLan[i]);
         var subnetNo = subnets[subnetIndex];
         var subMaskNo = submask[subnetIndex];
 
 
-        innerTable += "<tr>" + "<td>" + firstoctet + "." + secondoctet + "." + thirdoctet + "." + fourthOctet + "</td>" + "<td>" +
+        innerTable += "<tr>" + "<td>" + firstoctet + "." + secondoctet + "." + thirdoctet + "." + fourthoctet + "</td>" + "<td>" +
             subMaskNo + "</td>" + "<td>" + hostsPerLan[i] + "</td>" + "<td>" + "LAN: " + (i + 1) + "</td>" + "<td>" + subnetNo + "</td>";
 
-        innerTable += "<td>" + firstoctet + "." + secondoctet + "." + thirdoctet + "." + (fourthOctet + 1) + " - " + firstoctet +
-            "." + secondoctet + "." + thirdoctet + "." + (fourthOctet + hostsPerLan[i] - 2) + "</td>" + "</tr>";
+        innerTable += "<td>" + firstoctet + "." + secondoctet + "." + thirdoctet + "." + (fourthoctet + 1) + " - " + firstoctet +
+            "." + secondoctet + "." + thirdoctet + "." + (fourthoctet + hostsPerLan[i] - 2) + "</td>" + "</tr>";
 
-        fourthOctet += hostsPerLan[i];
+        fourthoctet += hostsPerLan[i];
     }
 
     innerTable += "</tbody></table>";
@@ -135,7 +210,7 @@ function getSubAndMask()
 
 function test ()
 {
-    if (validateForm() == true)
+    if (validateForm() === true)
     {
         sumHosts (); numLans(); lanHosts(); setHosts(); getSubAndMask();
     }
