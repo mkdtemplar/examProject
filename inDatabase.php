@@ -7,6 +7,10 @@
     print("<meta name='viewport' content='width=device-width, initial-scale=1.0' />");
     print("</head><body>");
     
+    $subnets = [1, 2, 4, 8, 16, 32, 64, 128, 256];
+    $hosts = [256, 128, 64, 32, 16, 8, 4, 2, 1];
+    $submask = [24, 25, 26, 27, 28, 29, 30, 31, 32];
+    $cidrLastOctet = [0, 128, 192, 224, 240, 248, 252, 254, 255];
     
         $first =$_POST["first"] ? : "";
         settype($first, "integer");
@@ -24,10 +28,76 @@
         $cidr = $_POST["cid"] ? : "";
         settype($cidr,"integer");
         
-    $subnets = [1, 2, 4, 8, 16, 32, 64, 128, 256];
-    $hosts = [256, 128, 64, 32, 16, 8, 4, 2, 1];
-    $submask = [24, 25, 26, 27, 28, 29, 30, 31, 32];
-    $cidrLastOctet = [0, 128, 192, 224, 240, 248, 252, 254, 255];
+    $keyIndex = array_search($cidr, haystack: $submask);
+    $cidrLastO = $cidrLastOctet[$keyIndex];
+    
+    $cidrBinary = decbin($cidrLastO);
+    $fourthBinary = decbin($fourth);
+    
+    settype($fourthBinary, "string");
+    settype($cidrBinary, "string");
+    
+    
+    
+    $cidrArray = array();
+    $fourthArray = array();
+    
+    for ($cidrIndex = 0; $cidrIndex < strlen($cidrBinary); $cidrIndex++)
+    {
+        $cidrArray[$cidrIndex] = $cidrBinary[$cidrIndex];
+    }
+    
+    for ($fourthIndex = 0; $fourthIndex < strlen($fourthBinary); $fourthIndex++)
+    {
+        $fourthArray[$fourthIndex] = $fourthBinary[$fourthIndex];
+    }
+    
+    $lengthFourthArray = count($fourthArray);
+    $lengthCidrArray = count($cidrArray);
+    
+    if ($lengthCidrArray < 8)
+    {
+        while ($lengthCidrArray < 8)
+        {
+            array_unshift($cidrArray, '0');
+            $lengthCidrArray++;
+        }
+    }
+    
+    if ($lengthFourthArray < 8)
+    {
+        while ($lengthFourthArray < 8)
+        {
+            array_unshift($fourthArray, '0');
+            $lengthFourthArray++;
+        }
+    }
+    
+    $res = '';
+    
+    for ($i = 0; $i < 8; $i++)
+    {
+        if ($fourthArray[$i] == '0' && $cidrArray[$i] == '0')
+        {
+            $res .= '0';
+        }
+        elseif ($fourthArray[$i] == '0' && $cidrArray[$i] == '1')
+        {
+            $res .= '0';
+        }
+        elseif ($fourthArray[$i] == '1' && $cidrArray[$i] == '0')
+        {
+            $res .= '0';
+        }
+        elseif ($fourthArray[$i] == '1' && $cidrArray[$i] == '1')
+        {
+            $res .= '1';
+        }
+    }
+    
+    settype($res, "integer");
+    
+    bindec($res);
     
     $hostsPerLan = array();
     $lanHostArray = array();
@@ -77,8 +147,8 @@
         $numberOfSubNets = $subnets[$key];
         $subMaskNo = $submask[$key];
         
-        $networkID = $first . "." . $second . "." . $third . "." . $fourth;
-        $rangeOfIp = $first . "." . $second . "." . $third . "." . $fourth + 1 . " - " . $first . "." . $second . "." . $third . "." . (($fourth + $lanHostArray[$q]) - 2);
+        $networkID = $first . "." . $second . "." . $third . "." . $res;
+        $rangeOfIp = $first . "." . $second . "." . $third . "." . $res + 1 . " - " . $first . "." . $second . "." . $third . "." . (($res + $lanHostArray[$q]) - 2);
         $query = "insert into vlsm (NetworkID, SubnetMask, NumberOfHostsPerSubnet, NumberOfSubnets, RangeOfUsableIPaddresses)
                   values ('$networkID', '$subMaskNo', '$lanHostArray[$q]', '$numberOfSubNets', '$rangeOfIp')";
     
@@ -87,7 +157,7 @@
             die(mysqli_error($database));
         }
         
-    $fourth += $lanHostArray[$q];
+    $res += $lanHostArray[$q];
     }
     
     mysqli_close($database);
