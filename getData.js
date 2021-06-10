@@ -75,15 +75,16 @@ function networkID()
 
 function validateForm()
 {
+    var firstoctet = document.forms["myform"]["first"].value;
     var secondoctet = document.forms["myform"]["second"].value;
     var thirdoctet =  document.forms["myform"]["third"].value;
     var fourthoctet =   document.forms["myform"]["fourth"].value;
     var cidrNo = document.forms["myform"]["cid"].value;
 
-    if ( isNaN(secondoctet) || isNaN(thirdoctet) || isNaN(fourthoctet) ||  secondoctet < 0 || secondoctet > 255
-        || thirdoctet < 0 || thirdoctet > 255 || fourthoctet < 0 || fourthoctet > 255 ||
+    if ( isNaN(firstoctet) || isNaN(secondoctet) || isNaN(thirdoctet) || isNaN(fourthoctet) ||  secondoctet < 0 ||
+        secondoctet > 255 || thirdoctet < 0 || thirdoctet > 255 || fourthoctet < 0 || fourthoctet > 255 ||
         secondoctet == "" || thirdoctet == "" || fourthoctet == "" || isNaN(cidrNo) || cidrNo < 24 || cidrNo > 32
-        || sumHosts() < 0 || cidrNo == "")
+        || sumHosts() < 0 || cidrNo == "" || fourthoctet > 255 || firstoctet < 1 | firstoctet > 255 || firstoctet == "")
         {
             document.getElementById("myform").reset();
             reFresh();
