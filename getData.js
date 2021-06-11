@@ -1,4 +1,3 @@
-
 var lanHostsArray = Array();
 var hostsPerLan = Array();
 
