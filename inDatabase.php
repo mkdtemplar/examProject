@@ -145,12 +145,14 @@
     {
         $key = array_search($lanHostArray[$q], $hosts);
         $numberOfSubNets = $subnets[$key];
-        $subMaskNo = $submask[$key];
+        $subMaskNo = "/". $submask[$key];
+        $subnetDecimal = "255.255.255." . $cidrLastOctet[$key];
         
         $networkID = $first . "." . $second . "." . $third . "." . $res;
         $rangeOfIp = $first . "." . $second . "." . $third . "." . $res + 1 . " - " . $first . "." . $second . "." . $third . "." . (($res + $lanHostArray[$q]) - 2);
-        $query = "insert into vlsm (NetworkID, SubnetMask, NumberOfHostsPerSubnet, NumberOfSubnets, RangeOfUsableIPaddresses)
-                  values ('$networkID', '$subMaskNo', '$lanHostArray[$q]', '$numberOfSubNets', '$rangeOfIp')";
+        $broadCastID = $first . "." . $second . "." . $third . "." . (($res + $lanHostArray[$q]) - 1);
+        $query = "insert into vlsm (NetworkID, CIDR, SubnetMask, NumberOfHostsPerSubnet, NumberOfSubnets, RangeOfUsableIPaddresses, broadcastID)
+                  values ('$networkID', '$subMaskNo', '$subnetDecimal', '$lanHostArray[$q]', '$numberOfSubNets', '$rangeOfIp', '$broadCastID')";
     
         if (!(mysqli_query($database, $query))) {
             print("<p>Could not execute query!</p></body></html>");

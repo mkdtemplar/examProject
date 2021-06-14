@@ -17,25 +17,30 @@
             background-color: lightblue;
             border-collapse: collapse;
             border: 1px solid gray;
+            text-align: center;
         }
         
         th, td {
             padding: 5px;
             border: 1px solid gray;
+            text-align: center;
         }
         
         tr:nth-child(even) {
             background-color: lightcoral;
+            text-align: center;
         }
         
         tr:first-child {
             background-color: lightgreen;
+            text-align: center;
         }
         h1 {
             font-weight: bold;
             color: blue;
             text-align: center;
             text-shadow: 5px 5px 10px red;
+            text-align: center;
         }
     </style>
 </head>
@@ -67,11 +72,13 @@
     <caption>Information stored in database table  VLSM</caption>
     <tr>
         <th>id</th>
-        <th>NetworkID</th>
-        <th>SubnetMask</th>
-        <th>NumberOfHostsPerSubnet</th>
-        <th>NumberOfSubnets</th>
-        <th>RangeOfUsableIPaddresses</th>
+        <th>Network ID</th>
+        <th>CIDR</th>
+        <th>Subnet Mask</th>
+        <th>Number Of Hosts Per Subnet</th>
+        <th>Number Of Subnets</th>
+        <th>Range Of Usable IP addresses</th>
+        <th>Broadcast ID</th>
     </tr>
     <?php
         for ($i = 0; $row = mysqli_fetch_row($result); $i++)
