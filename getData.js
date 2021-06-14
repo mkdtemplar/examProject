@@ -174,8 +174,9 @@ function getSubAndMask()
     innerTable += "<tr>";
 
     innerTable +=
-        "<th scope='col'>Network ID</th><th scope='col'>Subnet Mask</th><th scope='col'>Number of Hosts per subnet</th>" +
-        "<th scope='col'>LAN</th><th scope='col'>Number of subnets</th><th scope='col'>Range of usable IP addresses</th></tr></thead>" +
+        "<th scope='col'>Network ID</th><th scope='col'>CIDR</th><th scope='col'>Subnet Mask</th><th scope='col'>Number of Hosts per subnet</th>" +
+        "<th scope='col'>LAN</th><th scope='col'>Number of subnets</th><th scope='col'>Range of usable IP addresses</th><th scope='col'>" +
+        "Broadcast ID</th></tr></thead>" +
         "<tbody>";
 
     var firstoctet = parseInt(document.getElementById("firstoctet").value);
@@ -190,13 +191,15 @@ function getSubAndMask()
         var subnetIndex = hosts.indexOf(hostsPerLan[i]);
         var subnetNo = subnets[subnetIndex];
         var subMaskNo = submask[subnetIndex];
+        var subnetDecimal = cidrLastOctet[subnetIndex];
 
 
-        innerTable += "<tr>" + "<td>" + firstoctet + "." + secondoctet + "." + thirdoctet + "." + fourthoctet + "</td>" + "<td>" +
-            subMaskNo + "</td>" + "<td>" + hostsPerLan[i] + "</td>" + "<td>" + "LAN: " + (i + 1) + "</td>" + "<td>" + subnetNo + "</td>";
+        innerTable += "<tr>" + "<td>" + firstoctet + "." + secondoctet + "." + thirdoctet + "." + fourthoctet + "</td>" + "<td>" + "/" +
+            subMaskNo + "</td>" + "<td>255.255.255." + subnetDecimal + "</td>" + "<td>" + hostsPerLan[i] + "</td>" + "<td>" + "LAN: " + (i + 1) + "</td>" + "<td>" + subnetNo + "</td>";
 
         innerTable += "<td>" + firstoctet + "." + secondoctet + "." + thirdoctet + "." + (fourthoctet + 1) + " - " + firstoctet +
-            "." + secondoctet + "." + thirdoctet + "." + (fourthoctet + hostsPerLan[i] - 2) + "</td>" + "</tr>";
+            "." + secondoctet + "." + thirdoctet + "." + (fourthoctet + hostsPerLan[i] - 2) + "</td>" + "<td>" + firstoctet +
+            "." + secondoctet + "." + thirdoctet + "." + (fourthoctet + hostsPerLan[i] - 1) + "</td>" + "</tr>";
 
         fourthoctet += hostsPerLan[i];
     }
