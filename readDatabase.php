@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang = "en">
 <head>
     <meta charset = "utf-8">
     <meta http-equiv = "refresh" content = "120"/>
@@ -40,7 +40,6 @@
             color: blue;
             text-align: center;
             text-shadow: 5px 5px 10px red;
-            text-align: center;
         }
     </style>
 </head>
